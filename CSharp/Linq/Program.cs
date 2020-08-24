@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LinqPlayground
+namespace GW.AspNetTraining.LinqPlayground
 {
     class Program
     {

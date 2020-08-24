@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{01C5CF1D-78FE-4014-B2C3-39200BD58080}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LinqPlayground</RootNamespace>
+    <RootNamespace>GW.AspNetTraining.LinqPlayground</RootNamespace>
     <AssemblyName>LinqPlayground</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

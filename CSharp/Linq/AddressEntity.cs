@@ -1,4 +1,4 @@
-﻿namespace LinqPlayground
+﻿namespace GW.AspNetTraining.LinqPlayground
 {
     public class AddressEntity
     {

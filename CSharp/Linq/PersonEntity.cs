@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LinqPlayground
+namespace GW.AspNetTraining.LinqPlayground
 {
     public class PersonEntity
     {

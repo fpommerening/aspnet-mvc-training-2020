@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 
-namespace LinqPlayground
+namespace GW.AspNetTraining.LinqPlayground
 {
     public class JsonHelper
     {
