@@ -1,0 +1,150 @@
+1) Suche alle Personen die  kein Telefon haben.
+[]
+
+2) Suche alle Personen die zwei oder mehr Telefone haben.
+[
+  {
+    "Title": "Frau",
+    "Name": "Müller",
+    "FirstName": "Sabine",
+    "Birthday": "1972-06-24T00:00:00",
+    "Address": {
+      "Street": "Gerichtsweg",
+      "Number": "92c",
+      "ZipCode": "04103",
+      "City": "Leipzig"
+    },
+    "PhoneNumers": [
+      "0177 10172248",
+      "0341 66061036"
+    ]
+  },
+  {
+    "Title": "Herr",
+    "Name": "Müller",
+    "FirstName": "Joachim",
+    "Birthday": "1968-06-24T00:00:00",
+    "Address": {
+      "Street": "Gerichtsweg",
+      "Number": "92c",
+      "ZipCode": "04103",
+      "City": "Leipzig"
+    },
+    "PhoneNumers": [
+      "0172 10172248",
+      "0341 66061036"
+    ]
+  },
+  {
+    "Title": "Herr",
+    "Name": "Lehmann",
+    "FirstName": "Jens",
+    "Birthday": "1979-03-09T00:00:00",
+    "Address": {
+      "Street": "Rotenhäuser Straße",
+      "Number": "64g",
+      "ZipCode": "21107",
+      "City": "Hamburg"
+    },
+    "PhoneNumers": [
+      "040 5077067",
+      "0177 71187367"
+    ]
+  }
+]
+
+3) Suche alle Personen die noch keine 40 Jahre sind.
+[
+  {
+    "Title": "Herr",
+    "Name": "Eisleben",
+    "FirstName": "Kevin",
+    "Birthday": "1988-11-19T00:00:00",
+    "Address": {
+      "Street": "Carlebachstraße",
+      "Number": "7",
+      "ZipCode": "04357",
+      "City": "Leipzig"
+    },
+    "PhoneNumers": [
+      "01531 92116667"
+    ]
+  }
+]
+
+4) Projizieren für alle Personen Title, Vorname und Nachname als ein Text, sortiert nach Titel und Nachname
+[
+  "Frau Rosemaria Amwirkel",
+  "Frau Sabine Müller",
+  "Herr Kevin Eisleben",
+  "Herr Jens Lehmann",
+  "Herr Joachim Müller"
+]
+
+5)
+Suche alle Personen die zusammen wohnen 
+[
+  {
+    "Key": {
+      "Street": "Gerichtsweg",
+      "Zip": "04103",
+      "Number": "92c",
+      "City": "Leipzig"
+    },
+    "Items": [
+      {
+        "Title": "Frau",
+        "Name": "Müller",
+        "FirstName": "Sabine",
+        "Birthday": "1972-06-24T00:00:00",
+        "Address": {
+          "Street": "Gerichtsweg",
+          "Number": "92c",
+          "ZipCode": "04103",
+          "City": "Leipzig"
+        },
+        "PhoneNumers": [
+          "0177 10172248",
+          "0341 66061036"
+        ]
+      },
+      {
+        "Title": "Herr",
+        "Name": "Müller",
+        "FirstName": "Joachim",
+        "Birthday": "1968-06-24T00:00:00",
+        "Address": {
+          "Street": "Gerichtsweg",
+          "Number": "92c",
+          "ZipCode": "04103",
+          "City": "Leipzig"
+        },
+        "PhoneNumers": [
+          "0172 10172248",
+          "0341 66061036"
+        ]
+      }
+    ]
+  }
+]
+
+6) Suche den ältesten Mann.
+{
+  "Title": "Herr",
+  "Name": "Müller",
+  "FirstName": "Joachim",
+  "Birthday": "1968-06-24T00:00:00",
+  "Address": {
+    "Street": "Gerichtsweg",
+    "Number": "92c",
+    "ZipCode": "04103",
+    "City": "Leipzig"
+  },
+  "PhoneNumers": [
+    "0172 10172248",
+    "0341 66061036"
+  ]
+}
+
+7) Suche die erste Person aus Berlin, wenn vorhanden
+null
