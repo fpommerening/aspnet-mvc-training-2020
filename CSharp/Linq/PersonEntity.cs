@@ -14,7 +14,7 @@ namespace GW.AspNetTraining.LinqPlayground
         
         public AddressEntity Address { get; set; }
 
-        public string[] PhoneNumers { get; set; }
+        public string[] PhoneNumbers { get; set; }
 
     }
 }

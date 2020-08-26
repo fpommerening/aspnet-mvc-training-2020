@@ -20,7 +20,7 @@ namespace GW.AspNetTraining.LinqPlayground
                 FirstName = "Sabine",
                 Name = "Müller",
                 Title = "Frau",
-                PhoneNumers = new[]
+                PhoneNumbers = new[]
                 {
                     "0177 10172248",
                     "0341 66061036"
@@ -39,7 +39,7 @@ namespace GW.AspNetTraining.LinqPlayground
                 FirstName = "Joachim",
                 Name = "Müller",
                 Title = "Herr",
-                PhoneNumers = new[]
+                PhoneNumbers = new[]
                 {
                     "0172 10172248",
                     "0341 66061036"
@@ -58,7 +58,7 @@ namespace GW.AspNetTraining.LinqPlayground
                 FirstName = "Kevin",
                 Name = "Eisleben",
                 Title = "Herr",
-                PhoneNumers = new []
+                PhoneNumbers = new []
                 {
                     "01531 92116667"
                 }
@@ -76,7 +76,7 @@ namespace GW.AspNetTraining.LinqPlayground
                 FirstName = "Jens",
                 Name = "Lehmann",
                 Title = "Herr",
-                PhoneNumers = new []
+                PhoneNumbers = new []
                 {
                     "040 5077067",
                     "0177 71187367"
@@ -95,7 +95,7 @@ namespace GW.AspNetTraining.LinqPlayground
                 FirstName = "Rosemaria",
                 Name = "Amwirkel",
                 Title = "Frau",
-                PhoneNumers = new []
+                PhoneNumbers = new []
                 {
                     "040 2382291"
                 }
