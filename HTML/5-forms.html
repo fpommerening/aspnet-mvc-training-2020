@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulare</title>
+</head>
+<body>
+    <form action="forms.html">
+        <label for="fname">Name</label>
+        <input type="text" id="fname" name="name"
+         placeholder="hier Vorname u. Nachname" />
+         <label for="femail">E-Mail</label>
+         <input type="email" id="femail" name="email"/>
+
+         <label for="fgehalt">Gehalt</label>
+        <input type="number" id="fgehalt" name="gehalt" min="1000" step="0.01"/>
+
+        <label for="fgeburt">Geburtstag</label>
+        <input type="datetime-local" id="fgeburt" name="geburt"/>
+
+        <label for="fland">Land</label>
+        <input type="text" id="fland" name="land" list="dtlaender"/>
+        <datalist id="dtlaender">
+            <option value="Germany">Deutschland</option>
+            <option value="Frankreich"></option>
+            <option value="Italien"></option>
+        </datalist>
+        <input type="radio" id="fkaffee" value="Kaffee" name="getraenk">
+        <label for="fkaffee">Kaffee</label>
+        <input type="radio" id="ftee" value="Tee" name="getraenk">
+        <label for="ftee">Tee</label>
+        <input type="radio" checked="true" id="fwasser" value="Wasser" name="getraenk">
+        <label for="fwasser">Wasser</label>
+
+        <select id="fgeschlecht" name="geschlecht">
+            <option value="m">männlich</option>
+            <option value="w">weiblich</option>
+            <option value="d">divers</option>
+        </select>
+
+        
+
+
+
+
+
+
+        <input type="submit">
+    </form>
+</body>
+</html>
