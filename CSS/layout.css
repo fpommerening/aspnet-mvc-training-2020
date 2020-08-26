@@ -1,0 +1,48 @@
+
+.mysection{
+    font-family: serif;
+    color: navy;
+    text-align: justify;
+}
+
+/*
+.boldarea{
+    font-weight: bolder;
+}
+*/
+
+table {
+    border: black solid 2px;
+    border-collapse: collapse;
+}
+
+th{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+td{
+    border: black solid 1px;
+}
+
+#colLocation{
+    background-color: lightgreen;
+}
+
+tfoot{
+    text-align: right;
+}
+
+.newbox{
+    box-sizing:border-box;
+    width:500px;
+    padding: 5px;
+    border: 2px solid black;
+}
+
+.oldbox{
+    width:500px;
+    padding: 5px;
+    border: 2px solid black;
+}
+
