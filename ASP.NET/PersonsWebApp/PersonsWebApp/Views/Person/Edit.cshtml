@@ -8,20 +8,28 @@
 @using (Html.BeginForm("Edit", "Person"))
 {
     @Html.HiddenFor(x => x.Id);
-
-    <p>Name:</p>
-    <br />
-    @Html.TextBoxFor(x => x.Name)
-    <br />
-    <p>Vorname:</p>
-    <br />
-    @Html.TextBoxFor(x => x.FirstName)
-    <br />
-    <p>Geburtstag:</p>
-    <br />
-    @Html.TextBoxFor(x => x.Birthday)
-    <p>Bundesland</p>
-    @Html.DropDownListFor(x => x.Location,
-   ViewBag.Locations as IEnumerable<SelectListItem>)
-    <input type="submit" value="Speichern" />
+    <div class="flex-container">
+        <div class="label">@Html.LabelFor(x => x.Name)</div>
+        <div>@Html.EditorFor(x => x.Name)</div>
+    </div>
+    <div class="flex-container">
+        <div class="label">@Html.LabelFor(x => x.FirstName)</div>
+        <div>@Html.EditorFor(x => x.FirstName)</div>
+    </div>
+    <div class="flex-container">
+        <div class="label">@Html.LabelFor(x => x.Birthday)</div>
+        <div>@Html.EditorFor(x => x.Birthday)</div>
+    </div>
+    <div class="flex-container">
+        <div class="label">@Html.LabelFor(x => x.Location)</div>
+        <div>
+            @Html.DropDownListFor(x => x.Location,
+      ViewBag.Locations as IEnumerable<SelectListItem>)
+        </div>
+    </div>
+    <div class="flex-container">
+        <div>
+            <input type="submit" value="Speichern" />
+        </div>
+    </div>
 }
