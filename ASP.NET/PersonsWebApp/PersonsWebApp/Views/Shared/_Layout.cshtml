@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header>
+        @Html.ActionLink("Personen", "Index", "Person");
+        @Html.ActionLink("Produkte", "Index", "Product");
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+    <footer>
+        &copy; Frank Pommerening @System.DateTime.Now.Year
+    </footer>
+</body>
+</html>

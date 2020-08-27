@@ -1,46 +1,35 @@
 ﻿@model FP.AspNetTraining.PersonsWebApp.Models.Person[]
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+@Html.ActionLink("Neue Person", "Create");
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    @Html.ActionLink("Neue Person", "Create");
-
-    <table>
-        <thead>
-            <tr>
-                <th>Vorname</th>
-                <th>Name</th>
-                <th>Geburtstag</th>
-                <th>Bundesland</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @{ 
-                foreach (var person in Model)
-                {
-                        <tr>
-                            <td>@person.FirstName</td>
-                            <td>@person.Name</td>
-                            <td>@person.Birthday.ToShortDateString()</td>
-                            <td>
-                                @((ViewBag.Locations as IEnumerable<SelectListItem>)?
+<table>
+    <thead>
+        <tr>
+            <th>Vorname</th>
+            <th>Name</th>
+            <th>Geburtstag</th>
+            <th>Bundesland</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var person in Model)
+            {
+                <tr>
+                    <td>@person.FirstName</td>
+                    <td>@person.Name</td>
+                    <td>@person.Birthday.ToShortDateString()</td>
+                    <td>
+                        @((ViewBag.Locations as IEnumerable<SelectListItem>)?
                                 .FirstOrDefault(x=>x.Value == person.Location)?.Text)
-                            </td>
-                            <td>@Html.ActionLink("Bearbeiten", "Edit", new { person.Id})</td>
-                        </tr>
-                }
+                    </td>
+                    <td>@Html.ActionLink("Bearbeiten", "Edit", new { person.Id })</td>
+                </tr>
             }
-        </tbody>
-    </table>
-    
-</body>
-</html>
+        }
+    </tbody>
+</table>
