@@ -21,8 +21,28 @@ namespace FP.AspNetTraining.PersonsWebApp.Models
         [DisplayName("Geburtstag")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true,
-            DataFormatString = "{0:d}")]
-        public DateTime Birthday { get; set; }
+            DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime BirthdayEdit
+        {
+            get
+            {
+                return Birthday;
+            }
+            set
+            {
+                Birthday = value;
+            }
+
+        }
+
+        [DisplayName("Geburtstag")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = false,
+           DataFormatString = "{0:d}")]
+        public DateTime Birthday
+        {
+            get; set;
+        }
 
         [DisplayName("Bundesland")]
         public string Location { get; set; }
