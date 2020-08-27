@@ -43,6 +43,12 @@ namespace FP.AspNetTraining.PersonsWebApp.Controllers
         [HttpPost]
         public ActionResult Edit(Person person)
         {
+            if(!ModelState.IsValid)
+            {
+                InitViewBag();
+                return View(person);
+            }
+
             var entity = new PersonEntity
             {
                 Id = person.Id,

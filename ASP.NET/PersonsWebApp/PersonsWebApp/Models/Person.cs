@@ -12,12 +12,14 @@ namespace FP.AspNetTraining.PersonsWebApp.Models
         public Guid Id { get; set; }
 
         [DisplayName("Name")]
+        [Required()]
         public string Name { get; set; }
 
         [DisplayName("Vorname")]
         public string FirstName { get; set; }
 
         [DisplayName("Geburtstag")]
+        [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true,
             DataFormatString = "{0:d}")]
         public DateTime Birthday { get; set; }

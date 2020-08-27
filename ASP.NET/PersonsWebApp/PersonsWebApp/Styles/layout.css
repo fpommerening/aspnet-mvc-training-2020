@@ -37,3 +37,7 @@ td {
 .label{
     font-weight:bolder;
 }
+
+.field-validation-error{
+    color: firebrick;
+}
