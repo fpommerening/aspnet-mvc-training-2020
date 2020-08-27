@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
@@ -34,6 +35,24 @@ namespace FP.AspNetTraining.PersonsWebApp.Business
                     store.Persons.Remove(existingEntity);
                 }
                 store.Persons.Add(entity);
+                SaveStore(store);
+            }
+        }
+
+        public void DeletePerson(Guid id)
+        {
+            lock(syncRoot)
+            {
+                var store = GetStore();
+                if(store == null)
+                {
+                    return;
+                }
+                var existingEntity = store.Persons.FirstOrDefault(x => x.Id == id);
+                if(existingEntity != null)
+                {
+                    store.Persons.Remove(existingEntity);
+                }
                 SaveStore(store);
             }
         }

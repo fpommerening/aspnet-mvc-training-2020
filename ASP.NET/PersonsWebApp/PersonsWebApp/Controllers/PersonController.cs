@@ -55,6 +55,12 @@ namespace FP.AspNetTraining.PersonsWebApp.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Delete(Guid id)
+        {
+            personRepository.DeletePerson(id);
+            return RedirectToAction(nameof(Index));
+        }
+
         private void InitViewBag()
         {
             var locations = new List<SelectListItem>()

@@ -1,4 +1,4 @@
-﻿@model FP.AspNetTraining.PersonsWebApp.Models.Person[]
+﻿@model IEnumerable<FP.AspNetTraining.PersonsWebApp.Models.Person>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Personen";
@@ -9,10 +9,10 @@
 <table>
     <thead>
         <tr>
-            <th>Vorname</th>
-            <th>Name</th>
-            <th>Geburtstag</th>
-            <th>Bundesland</th>
+            <th>@Html.DisplayNameFor(x=> x.FirstName)</th>
+            <th>@Html.DisplayNameFor(x => x.Name)</th>
+            <th>@Html.DisplayNameFor(x => x.Birthday)</th>
+            <th>@Html.DisplayNameFor(x => x.Location)</th>
             <th></th>
         </tr>
     </thead>
@@ -21,14 +21,17 @@
             foreach (var person in Model)
             {
                 <tr>
-                    <td>@person.FirstName</td>
-                    <td>@person.Name</td>
-                    <td>@person.Birthday.ToShortDateString()</td>
+                    <td>@Html.DisplayFor(x=> person.FirstName)</td>
+                    <td>@Html.DisplayFor(x => person.Name)</td>
+                    <td>@Html.DisplayFor(x => person.Birthday)</td>
                     <td>
                         @((ViewBag.Locations as IEnumerable<SelectListItem>)?
                                 .FirstOrDefault(x=>x.Value == person.Location)?.Text)
                     </td>
-                    <td>@Html.ActionLink("Bearbeiten", "Edit", new { person.Id })</td>
+                    <td>
+                        @Html.ActionLink("Bearbeiten", "Edit", new { person.Id })
+                        @Html.ActionLink("Löschen", "Delete", new { person.Id })
+                    </td>
                 </tr>
             }
         }
