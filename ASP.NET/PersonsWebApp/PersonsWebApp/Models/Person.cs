@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace FP.AspNetTraining.PersonsWebApp.Business
+namespace FP.AspNetTraining.PersonsWebApp.Models
 {
-    public class PersonEntity
+    public class Person
     {
         public Guid Id { get; set; }
 

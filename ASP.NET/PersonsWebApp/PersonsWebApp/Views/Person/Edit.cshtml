@@ -1,0 +1,34 @@
+﻿@model FP.AspNetTraining.PersonsWebApp.Models.Person
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    @using (Html.BeginForm("Edit", "Person"))
+    {
+        @Html.HiddenFor(x => x.Id);
+
+        <p>Name:</p><br />
+        @Html.TextBoxFor(x => x.Name)
+        <br />
+        <p>Vorname:</p> <br />
+         @Html.TextBoxFor(x => x.FirstName)<br />
+        <p>Geburtstag:</p> <br />
+         @Html.TextBoxFor(x => x.Birthday)
+        <p>Bundesland</p>
+        @Html.DropDownListFor(x=>x.Location,
+       ViewBag.Locations as IEnumerable<SelectListItem>)
+        <input type="submit" value="Speichern" />
+    }
+
+
+</body>
+</html>

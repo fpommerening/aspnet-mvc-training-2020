@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace FP.AspNetTraining.PersonsWebApp.Business
@@ -11,6 +13,29 @@ namespace FP.AspNetTraining.PersonsWebApp.Business
         public PersonRepository(string dataStorePath)
         {
             _dataStorePath = dataStorePath;
+        }
+
+        public List<PersonEntity> GetPersons()
+        {
+            lock(syncRoot)
+            {
+                return (GetStore()?.Persons ?? Enumerable.Empty<PersonEntity>()).ToList();
+            }
+        }
+
+        public void SavePerson(PersonEntity entity)
+        {
+            lock(syncRoot)
+            {
+                var store = GetStore() ?? new DataStore();
+                var existingEntity = store.Persons.FirstOrDefault(x => x.Id == entity.Id);
+                if(existingEntity != null)
+                {
+                    store.Persons.Remove(existingEntity);
+                }
+                store.Persons.Add(entity);
+                SaveStore(store);
+            }
         }
 
         private DataStore GetStore()
