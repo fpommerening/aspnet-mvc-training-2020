@@ -60,7 +60,7 @@ namespace FP.AspNetTraining.PersonsWebApp.Controllers
             {
                 new SelectListItem{Text = "", Value = ""},
                 new SelectListItem{Text = "Hamburg", Value = "HH"},
-                new SelectListItem{Text = "Nordtrhein-Westfalen", Value = "NRW"},
+                new SelectListItem{Text = "Nordrhein-Westfalen", Value = "NRW"},
                 new SelectListItem{Text = "Bayern", Value = "BY"},
                 new SelectListItem{Text = "Rheinland-Pfalz", Value = "RLP"}
             };
