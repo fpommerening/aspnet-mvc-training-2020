@@ -1,0 +1,25 @@
+﻿header {
+    height:50px;
+    background-color: lightgray
+}
+
+footer {
+    height: 50px;
+    background-color: lightgray
+}
+
+table{
+    border: black solid 2px;
+    border-collapse: collapse;
+    margin:10px;
+}
+
+th{
+    border: black solid 1px;
+    padding: 5px;
+    }
+
+td {
+    border: black solid 1px;
+    padding: 5px;
+}

@@ -2,7 +2,9 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Model.IsNew ? "Neue Person" : $"{Model.FirstName} {Model.Name}";
 }
+
 @using (Html.BeginForm("Edit", "Person"))
 {
     @Html.HiddenFor(x => x.Id);

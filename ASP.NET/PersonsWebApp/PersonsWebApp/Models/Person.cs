@@ -16,5 +16,7 @@ namespace FP.AspNetTraining.PersonsWebApp.Models
         public DateTime Birthday { get; set; }
 
         public string Location { get; set; }
+
+        public bool IsNew { get; set; }
     }
 }

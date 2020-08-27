@@ -31,7 +31,8 @@ namespace GW.AspNetTraining.LinqPlayground
             //    .Select(x=>x.Birthday).FirstOrDefault();
 
             //var result = PersonRepository.Persons.TakeWhile(x => x.Title == "Frau");
-            //var result = PersonRepository.Persons.OrderBy(x => x.Address.City).ThenBy(x => x.Address.ZipCode).ThenBy(x => x.Address.Street);
+            var result = PersonRepository.Persons.OrderBy(x => x.Address);
+
 
             //var result = PersonRepository.Persons.OrderBy(x=>x);
 
@@ -67,7 +68,7 @@ namespace GW.AspNetTraining.LinqPlayground
             //var result = PersonRepository.Persons.First(x => x.Birthday == min);
 
             // 7) Suche die erste Person aus Berlin, wenn vorhanden
-            var result = PersonRepository.Persons.Where(x => x.Address.City == "Berlin").FirstOrDefault();
+            //var result = PersonRepository.Persons.Where(x => x.Address.City == "Berlin").FirstOrDefault();
 
             Print(result);
 

@@ -26,7 +26,8 @@ namespace FP.AspNetTraining.PersonsWebApp.Controllers
             InitViewBag();
             var model = new Person
             {
-                Id = Guid.NewGuid()
+                Id = Guid.NewGuid(),
+                IsNew = true
             };
             return View("Edit", model);
         }
