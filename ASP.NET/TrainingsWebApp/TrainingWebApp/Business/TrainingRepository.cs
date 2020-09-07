@@ -57,6 +57,21 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
             }
         }
 
+        public TrainingEntity GetTrainingById(Guid id)
+        {
+            lock (syncRoot)
+            {
+                var store = GetStore();
+                var item = store.Trainings.FirstOrDefault(x => x.Id == id);
+                if (item == null)
+                {
+                    throw new ArgumentOutOfRangeException($"training with id '{id}' not exist.");
+                }
+                return item;
+            }
+
+        }
+
 
         private static readonly LocationEntity[] Locations = new []
         {
