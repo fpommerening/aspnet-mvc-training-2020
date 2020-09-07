@@ -1,0 +1,63 @@
+﻿@model GW.AspNetTraining.TrainingsWebApp.Models.Training
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "Training"))
+{
+    @Html.HiddenFor(x => x.Id)
+    <div class="flex-container">
+        <div class="label">@Html.LabelFor(x => x.Title)</div>
+        <div>
+            @Html.TextBoxFor(x => x.Title)
+            @Html.ValidationMessageFor(x => x.Title)
+        </div>
+    </div>
+    <div class="flex-container">
+        <div class="label">@Html.LabelFor(x => x.Description)</div>
+        <div>
+            @Html.TextAreaFor(x => x.Description)
+            @Html.ValidationMessageFor(x => x.Description)
+        </div>
+    </div>
+    <div class="flex-container">
+        <div class="label">@Html.LabelFor(x => x.Duration)</div>
+        <div>
+            @Html.TextBoxFor(x => x.Duration)
+            @Html.ValidationMessageFor(x => x.Duration)
+        </div>
+    </div>
+    <div class="flex-container">
+        <div class="label">@Html.LabelFor(x => x.Level)</div>
+        <div>
+            @Html.ValidationMessageFor(x => x.Level)
+            @Html.RadioButtonFor(x => x.Level, 100) Anfänger<br />
+            @Html.RadioButtonFor(x => x.Level, 200) Fortgeschritten<br />
+            @Html.RadioButtonFor(x => x.Level, 300) Experte<br />
+        </div>
+    </div>
+    <div class="flex-container">
+        <div class="label">@Html.LabelFor(x => x.Location)</div>
+        <div>
+            @Html.DropDownListFor(x => x.Location,
+                ViewBag.Locations as IEnumerable<SelectListItem>)
+            @Html.ValidationMessageFor(x => x.Location)
+        </div>
+    </div>
+    <div class="flex-container">
+        <div class="label">@Html.LabelFor(x => x.Approval)</div>
+        <div>
+            <th>@Html.LabelFor(x=>x.Approval)</th>
+            <td>@Html.CheckBoxFor(x => x.Approval) 
+                @Html.ValidationMessageFor(x => x.Approval)</td>
+        </div>
+    </div>
+    <div class="flex-container">
+        <div>
+            <button type="submit">Speichern</button>
+        </div>
+    </div>
+}
+

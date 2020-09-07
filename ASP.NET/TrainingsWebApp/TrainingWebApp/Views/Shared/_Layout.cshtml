@@ -1,0 +1,23 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Styles/layout.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<header class="flex-container">
+    
+    @Html.ActionLink("Schulungen", "Index", "Training")
+    @Html.ActionLink("AGB", "Index", "AGB")
+</header>
+<main>
+    @RenderBody()
+</main>
+<footer>
+    &copy; Frank Pommerening @System.DateTime.Now.Year  
+</footer>
+</body>
+</html>

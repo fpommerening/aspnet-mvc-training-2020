@@ -1,0 +1,44 @@
+﻿@model IEnumerable<GW.AspNetTraining.TrainingsWebApp.Models.Training>
+@{
+    ViewBag.Title = "Schulungen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.ActionLink("Neue Schulung", "Create")
+
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Title)</th>
+            <th>@Html.DisplayNameFor(model => model.Duration)</th>
+            <th>@Html.DisplayNameFor(model => model.Level)</th>
+            <th>@Html.DisplayNameFor(model => model.Location)</th>
+            <th>@Html.DisplayNameFor(model => model.Approval)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var training in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x => training.Title)</td>
+                    <td>@Html.DisplayFor(x => training.Duration)</td>
+                    <td>@Html.DisplayFor(x => training.Level)</td>
+                    <td>
+                        @((ViewBag.Locations as IEnumerable<SelectListItem>)
+                        ?.FirstOrDefault(x=>x.Value == training.Location)
+                        ?.Text)
+                    </td>
+                    <td>
+                        @(training.Approval ? "ja" : "nein")
+                    </td>
+                    <td>
+                        @Html.ActionLink("Bearbeiten", "Edit", new { training.Id })
+                        @Html.ActionLink("Löschen", "Delete", new { training.Id })
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

@@ -16,8 +16,50 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
             _dataStorePath = dataStorePath;
         }
 
+        public List<TrainingEntity> GetTrainings()
+        {
+            lock (syncRoot)
+            {
+                return (GetStore()?.Trainings ?? Enumerable.Empty<TrainingEntity>()).ToList();
+            }
+        }
 
-        private static readonly LocationEntity[] Locations = {
+        public void SaveTraining(TrainingEntity entity)
+        {
+            lock (syncRoot)
+            {
+                var store = GetStore() ?? new DataStore();
+                var existingEntity = store.Trainings.FirstOrDefault(x => x.Id == entity.Id);
+                if (existingEntity != null)
+                {
+                    store.Trainings.Remove(existingEntity);
+                }
+                store.Trainings.Add(entity);
+                SaveStore(store);
+            }
+        }
+
+        public void DeleteTraining(Guid id)
+        {
+            lock (syncRoot)
+            {
+                var store = GetStore();
+                if (store == null)
+                {
+                    return;
+                }
+                var existingEntity = store.Trainings.FirstOrDefault(x => x.Id == id);
+                if (existingEntity != null)
+                {
+                    store.Trainings.Remove(existingEntity);
+                }
+                SaveStore(store);
+            }
+        }
+
+
+        private static readonly LocationEntity[] Locations = new []
+        {
             new LocationEntity{Id = "HL", Description = "Halle (Saale)"},
             new LocationEntity{Id = "HH", Description = "Hamburg"},
             new LocationEntity{Id = "HB", Description = "Bremen"},
