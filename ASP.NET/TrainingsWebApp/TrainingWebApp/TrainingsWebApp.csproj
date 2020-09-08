@@ -104,6 +104,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Business\AttendeeEntity.cs" />
     <Compile Include="Business\DataStore.cs" />
+    <Compile Include="Business\ITrainingRepository.cs" />
     <Compile Include="Business\LocationEntity.cs" />
     <Compile Include="Business\OrderEntity.cs" />
     <Compile Include="Business\OrderProcessor.cs" />

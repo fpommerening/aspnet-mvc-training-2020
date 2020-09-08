@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace GW.AspNetTraining.TrainingsWebApp.Business
 {
-    public class TrainingRepository
+    public class TrainingRepository : ITrainingRepository
     {
         private readonly string _dataStorePath;
         private static object syncRoot = new object();
@@ -73,7 +73,7 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
         }
 
 
-        private static readonly LocationEntity[] Locations = new []
+        private static readonly LocationEntity[] Locations = new[]
         {
             new LocationEntity{Id = "HL", Description = "Halle (Saale)"},
             new LocationEntity{Id = "HH", Description = "Hamburg"},

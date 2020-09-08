@@ -4,9 +4,9 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
 {
     public class OrderProcessor
     {
-        private readonly TrainingRepository _trainingRepository;
+        private readonly ITrainingRepository _trainingRepository;
 
-        public OrderProcessor(TrainingRepository trainingRepository)
+        public OrderProcessor(ITrainingRepository trainingRepository)
         {
             _trainingRepository = trainingRepository;
         }
