@@ -9,7 +9,13 @@ namespace GW.AspNetTraining.TrainingsWebApp.Controllers
 {
     public class TrainingController : Controller
     {
-        TrainingRepository _trainingRepository = new TrainingRepository(@"c:\temp\trainings.xml");
+        ITrainingRepository _trainingRepository;
+        public TrainingController(ITrainingRepository trainingRepository)
+        {
+            _trainingRepository = trainingRepository;
+        }
+
+        //TrainingRepository _trainingRepository = new TrainingRepository(@"c:\temp\trainings.xml");
 
         // GET: Training
         public ActionResult Index()
