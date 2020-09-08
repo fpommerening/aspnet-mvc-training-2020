@@ -12,7 +12,7 @@ namespace GW.AspNetTraining.TrainingsWebApp
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Training", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
