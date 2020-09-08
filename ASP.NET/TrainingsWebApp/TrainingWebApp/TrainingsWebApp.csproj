@@ -102,8 +102,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Business\AttendeeEntity.cs" />
     <Compile Include="Business\DataStore.cs" />
     <Compile Include="Business\LocationEntity.cs" />
+    <Compile Include="Business\OrderEntity.cs" />
+    <Compile Include="Business\OrderProcessor.cs" />
     <Compile Include="Business\TrainingEntity.cs" />
     <Compile Include="Business\TrainingRepository.cs" />
     <Compile Include="Controllers\AGBController.cs" />
