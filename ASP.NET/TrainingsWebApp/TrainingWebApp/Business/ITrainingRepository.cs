@@ -11,5 +11,9 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
         Task<TrainingEntity> GetTrainingById(Guid id);
         Task<List<TrainingEntity>> GetTrainings();
         Task SaveTraining(TrainingEntity entity);
+        Task<List<OrderEntity>> GetOrders();
+
+        Task SaveOrder(OrderEntity entity);
+
     }
 }
