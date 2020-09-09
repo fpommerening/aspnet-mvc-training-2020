@@ -95,6 +95,40 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
 
         }
 
+        public async Task<List<OrderEntity>> GetOrders()
+        {
+            await _semaphoreDataStore.WaitAsync();
+            try
+            {
+                var datastore = await GetStore();
+                return (datastore?.Orders ?? Enumerable.Empty<OrderEntity>()).ToList();
+            }
+            finally
+            {
+                _semaphoreDataStore.Release();
+            }
+
+        }
+
+        public async Task SaveOrder(OrderEntity entity)
+        {
+            await _semaphoreDataStore.WaitAsync();
+            try
+            {
+                var store = await GetStore() ?? new DataStore();
+                var existingEntity = store.Orders.FirstOrDefault(x => x.Id == entity.Id);
+                if (existingEntity != null)
+                {
+                    store.Orders.Remove(existingEntity);
+                }
+                store.Orders.Add(entity);
+                await SaveStore(store);
+            }
+            finally
+            {
+                _semaphoreDataStore.Release();
+            }
+        }
 
         private static readonly LocationEntity[] Locations = new[]
         {
@@ -109,7 +143,6 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
         {
             return Locations;
         }
-
 
         private async Task<DataStore> GetStore()
         {

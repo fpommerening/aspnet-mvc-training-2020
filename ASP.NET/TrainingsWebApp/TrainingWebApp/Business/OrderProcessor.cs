@@ -29,7 +29,8 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
             var order = new OrderEntity
             {
                 Attendees = attendees,
-                Training = training
+                Training = training,
+                Id = Guid.NewGuid()
             };
 
             if (attendees.Length == 1)
