@@ -1,0 +1,18 @@
+﻿@model GW.AspNetTraining.TrainingsWebApp.Models.Training
+<tr>
+    <td>@Html.DisplayFor(x => Model.Title)</td>
+    <td>@Html.DisplayFor(x => Model.Duration)</td>
+    <td>@Html.DisplayFor(x => Model.Level)</td>
+    <td>
+        @((ViewBag.Locations as IEnumerable<SelectListItem>)
+                        ?.FirstOrDefault(x=>x.Value == Model.Location)
+                        ?.Text)
+    </td>
+    <td>
+        @(Model.Approval ? "ja" : "nein")
+    </td>
+    <td>
+        @Html.ActionLink("Bearbeiten", "Edit", new { Model.Id })
+        @Html.ActionLink("Löschen", "Delete", new { Model.Id })
+    </td>
+</tr>

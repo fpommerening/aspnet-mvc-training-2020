@@ -141,6 +141,7 @@
     <Content Include="Views\Training\Index.cshtml" />
     <Content Include="Views\AGB\Index.cshtml" />
     <Content Include="Views\Training\Edit.cshtml" />
+    <Content Include="Views\Training\Row.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

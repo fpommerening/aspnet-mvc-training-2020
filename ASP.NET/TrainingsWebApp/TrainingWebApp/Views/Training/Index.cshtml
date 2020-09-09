@@ -20,23 +20,7 @@
         @{
             foreach (var training in Model)
             {
-                <tr>
-                    <td>@Html.DisplayFor(x => training.Title)</td>
-                    <td>@Html.DisplayFor(x => training.Duration)</td>
-                    <td>@Html.DisplayFor(x => training.Level)</td>
-                    <td>
-                        @((ViewBag.Locations as IEnumerable<SelectListItem>)
-                        ?.FirstOrDefault(x=>x.Value == training.Location)
-                        ?.Text)
-                    </td>
-                    <td>
-                        @(training.Approval ? "ja" : "nein")
-                    </td>
-                    <td>
-                        @Html.ActionLink("Bearbeiten", "Edit", new { training.Id })
-                        @Html.ActionLink("Löschen", "Delete", new { training.Id })
-                    </td>
-                </tr>
+                Html.RenderPartial("Row", training);
             }
         }
 
