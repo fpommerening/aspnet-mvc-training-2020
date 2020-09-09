@@ -49,6 +49,7 @@ namespace GW.AspNetTraining.TrainingsWebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(Training training)
         {
             if (ModelState.IsValid)
