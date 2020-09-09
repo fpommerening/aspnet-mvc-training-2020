@@ -1,7 +1,10 @@
-﻿namespace GW.AspNetTraining.TrainingsWebApp.Business
+﻿using System;
+
+namespace GW.AspNetTraining.TrainingsWebApp.Business
 {
     public class OrderEntity
     {
+        public Guid Id { get; set; }
 
         public AttendeeEntity[] Attendees { get; set; }
 
