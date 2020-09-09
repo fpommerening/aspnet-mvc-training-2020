@@ -24,7 +24,7 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
                 throw new InvalidOperationException("The order needs at least one attendees");
             }
 
-            var training = await _trainingRepository.GetTrainingById(trainingId);
+            var training = await _trainingRepository.GetTrainingById(trainingId).ConfigureAwait(false);
 
             var order = new OrderEntity
             {

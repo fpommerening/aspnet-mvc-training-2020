@@ -20,10 +20,10 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
 
         public async Task<List<TrainingEntity>> GetTrainings()
         {
-            await _semaphoreDataStore.WaitAsync();
+            await _semaphoreDataStore.WaitAsync().ConfigureAwait(false);
             try
             {
-                var datastore = await GetStore();
+                var datastore = await GetStore().ConfigureAwait(false);
                 return (datastore?.Trainings ?? Enumerable.Empty<TrainingEntity>()).ToList();
             }
             finally
@@ -34,10 +34,10 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
 
         public async Task SaveTraining(TrainingEntity entity)
         {
-            await _semaphoreDataStore.WaitAsync();
+            await _semaphoreDataStore.WaitAsync().ConfigureAwait(false);
             try
             {
-                var store = await GetStore() ?? new DataStore();
+                var store = await GetStore().ConfigureAwait(false) ?? new DataStore();
                 var existingEntity = store.Trainings.FirstOrDefault(x => x.Id == entity.Id);
                 if (existingEntity != null)
                 {
@@ -54,10 +54,10 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
 
         public async Task DeleteTraining(Guid id)
         {
-            await _semaphoreDataStore.WaitAsync();
+            await _semaphoreDataStore.WaitAsync().ConfigureAwait(false); ;
             try
             {
-                var store = await GetStore();
+                var store = await GetStore().ConfigureAwait(false); ;
                 if (store == null)
                 {
                     return;
@@ -77,10 +77,10 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
 
         public async Task<TrainingEntity> GetTrainingById(Guid id)
         {
-            await _semaphoreDataStore.WaitAsync();
+            await _semaphoreDataStore.WaitAsync().ConfigureAwait(false);
             try
             {
-                var store = await GetStore();
+                var store = await GetStore().ConfigureAwait(false);
                 var item = store?.Trainings?.FirstOrDefault(x => x.Id == id);
                 if (item == null)
                 {
@@ -120,7 +120,7 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
 
             using(var reader = File.OpenText(_dataStorePath))
             {
-                var fileContent = await reader.ReadToEndAsync();
+                var fileContent = await reader.ReadToEndAsync().ConfigureAwait(false);
                 using (var sr = new StringReader(fileContent))
                 {
                     var serializer = new XmlSerializer(typeof(DataStore));
@@ -137,7 +137,7 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
                 {
                     var serializer = new XmlSerializer(typeof(DataStore));
                     serializer.Serialize(sw, store);
-                    await writer.WriteAsync(sw.ToString());
+                    await writer.WriteAsync(sw.ToString()).ConfigureAwait(false);
                 }
             }
         }
