@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace GW.AspNetTraining.TrainingsWebApp.Business
@@ -9,41 +11,53 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
     public class TrainingRepository : ITrainingRepository
     {
         private readonly string _dataStorePath;
-        private static object syncRoot = new object();
+        private static SemaphoreSlim _semaphoreDataStore = new SemaphoreSlim(1, 1);
 
         public TrainingRepository(string dataStorePath)
         {
             _dataStorePath = dataStorePath;
         }
 
-        public List<TrainingEntity> GetTrainings()
+        public async Task<List<TrainingEntity>> GetTrainings()
         {
-            lock (syncRoot)
+            await _semaphoreDataStore.WaitAsync();
+            try
             {
-                return (GetStore()?.Trainings ?? Enumerable.Empty<TrainingEntity>()).ToList();
+                var datastore = await GetStore();
+                return (datastore?.Trainings ?? Enumerable.Empty<TrainingEntity>()).ToList();
+            }
+            finally
+            {
+                _semaphoreDataStore.Release();
             }
         }
 
-        public void SaveTraining(TrainingEntity entity)
+        public async Task SaveTraining(TrainingEntity entity)
         {
-            lock (syncRoot)
+            await _semaphoreDataStore.WaitAsync();
+            try
             {
-                var store = GetStore() ?? new DataStore();
+                var store = await GetStore() ?? new DataStore();
                 var existingEntity = store.Trainings.FirstOrDefault(x => x.Id == entity.Id);
                 if (existingEntity != null)
                 {
                     store.Trainings.Remove(existingEntity);
                 }
                 store.Trainings.Add(entity);
-                SaveStore(store);
+                await SaveStore(store);
+            }
+            finally
+            {
+                _semaphoreDataStore.Release();
             }
         }
 
-        public void DeleteTraining(Guid id)
+        public async Task DeleteTraining(Guid id)
         {
-            lock (syncRoot)
+            await _semaphoreDataStore.WaitAsync();
+            try
             {
-                var store = GetStore();
+                var store = await GetStore();
                 if (store == null)
                 {
                     return;
@@ -53,21 +67,30 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
                 {
                     store.Trainings.Remove(existingEntity);
                 }
-                SaveStore(store);
+                await SaveStore(store);
+            }
+            finally
+            {
+                _semaphoreDataStore.Release();
             }
         }
 
-        public TrainingEntity GetTrainingById(Guid id)
+        public async Task<TrainingEntity> GetTrainingById(Guid id)
         {
-            lock (syncRoot)
+            await _semaphoreDataStore.WaitAsync();
+            try
             {
-                var store = GetStore();
-                var item = store.Trainings.FirstOrDefault(x => x.Id == id);
+                var store = await GetStore();
+                var item = store?.Trainings?.FirstOrDefault(x => x.Id == id);
                 if (item == null)
                 {
                     throw new ArgumentOutOfRangeException($"training with id '{id}' not exist.");
                 }
                 return item;
+            }
+            finally
+            {
+                _semaphoreDataStore.Release();
             }
 
         }
@@ -88,30 +111,35 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
         }
 
 
-        private DataStore GetStore()
+        private async Task<DataStore> GetStore()
         {
             if (!File.Exists(_dataStorePath))
             {
                 return null;
             }
 
-            var fileContent = File.ReadAllText(_dataStorePath);
-            using (var sr = new StringReader(fileContent))
+            using(var reader = File.OpenText(_dataStorePath))
             {
-                var serializer = new XmlSerializer(typeof(DataStore));
-                return (serializer.Deserialize(sr) as DataStore);
+                var fileContent = await reader.ReadToEndAsync();
+                using (var sr = new StringReader(fileContent))
+                {
+                    var serializer = new XmlSerializer(typeof(DataStore));
+                    return (serializer.Deserialize(sr) as DataStore);
+                }
             }
         }
 
-        private void SaveStore(DataStore store)
+        private async Task SaveStore(DataStore store)
         {
-            using (var sw = new StringWriter())
+            using(var writer = File.CreateText(_dataStorePath))
             {
-                var serializer = new XmlSerializer(typeof(DataStore));
-                serializer.Serialize(sw, store);
-                File.WriteAllText(_dataStorePath, sw.ToString());
+                using (var sw = new StringWriter())
+                {
+                    var serializer = new XmlSerializer(typeof(DataStore));
+                    serializer.Serialize(sw, store);
+                    await writer.WriteAsync(sw.ToString());
+                }
             }
         }
-
     }
 }

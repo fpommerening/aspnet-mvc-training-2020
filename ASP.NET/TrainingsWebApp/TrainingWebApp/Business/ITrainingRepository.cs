@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GW.AspNetTraining.TrainingsWebApp.Business
 {
     public interface ITrainingRepository
     {
-        void DeleteTraining(Guid id);
+        Task DeleteTraining(Guid id);
         IEnumerable<LocationEntity> GetLocations();
-        TrainingEntity GetTrainingById(Guid id);
-        List<TrainingEntity> GetTrainings();
-        void SaveTraining(TrainingEntity entity);
+        Task<TrainingEntity> GetTrainingById(Guid id);
+        Task<List<TrainingEntity>> GetTrainings();
+        Task SaveTraining(TrainingEntity entity);
     }
 }

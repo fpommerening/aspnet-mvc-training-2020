@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using GW.AspNetTraining.TrainingsWebApp.Business;
 using GW.AspNetTraining.TrainingsWebApp.Models;
@@ -18,9 +19,9 @@ namespace GW.AspNetTraining.TrainingsWebApp.Controllers
         //TrainingRepository _trainingRepository = new TrainingRepository(@"c:\temp\trainings.xml");
 
         // GET: Training
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var models = _trainingRepository.GetTrainings().Select(MapEntityToModel).ToList();
+            var models = (await _trainingRepository.GetTrainings()).Select(MapEntityToModel).ToList();
             InitViewBag();
             return View(models);
         }
@@ -35,9 +36,9 @@ namespace GW.AspNetTraining.TrainingsWebApp.Controllers
             return View("Edit", training);
         }
 
-        public ActionResult Edit(Guid id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-            var enitity = _trainingRepository.GetTrainings().FirstOrDefault(x => x.Id == id);
+            var enitity = (await _trainingRepository.GetTrainings()).FirstOrDefault(x => x.Id == id);
             if (enitity == null)
             {
                 return RedirectToAction("Index");
@@ -48,21 +49,21 @@ namespace GW.AspNetTraining.TrainingsWebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Training training)
+        public async Task<ActionResult> Edit(Training training)
         {
             if (ModelState.IsValid)
             {
                 var entity = MapModelToEntity(training);
-                _trainingRepository.SaveTraining(entity);
+                await _trainingRepository.SaveTraining(entity);
                 return RedirectToAction("Index");
             }
             InitViewBag();
             return View(training);
         }
 
-        public ActionResult Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
-            _trainingRepository.DeleteTraining(id);
+            await _trainingRepository.DeleteTraining(id);
             return RedirectToAction("Index");
         }
 

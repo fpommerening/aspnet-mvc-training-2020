@@ -23,7 +23,7 @@ namespace TrainingsTest
             var repo = NSubstitute.Substitute.For<ITrainingRepository>();
             var sut = new OrderProcessor(repo);
 
-            TestDelegate result = ()=> sut.OrderTraining(trainingId, attendees);
+            async Task result() => await sut.OrderTraining(trainingId, attendees);
 
             //NUnit
             Assert.That(result, Throws.ArgumentNullException);
@@ -37,13 +37,13 @@ namespace TrainingsTest
             var repo = NSubstitute.Substitute.For<ITrainingRepository>();
             var sut = new OrderProcessor(repo);
 
-            TestDelegate result = () => sut.OrderTraining(trainingId, attendees);
+            async Task result() => await sut.OrderTraining(trainingId, attendees);
 
             //NUnit
             Assert.That(result, Throws.InvalidOperationException);
         }
         [Test]
-        public void OneAttendeeShouldPayFullPrice()
+        public async Task OneAttendeeShouldPayFullPrice()
         {
             var trainingId = Guid.Empty;
             var price = 345m;
@@ -59,7 +59,7 @@ namespace TrainingsTest
             
             var sut = new OrderProcessor(repo);
             // ACT
-            var result = sut.OrderTraining(trainingId, attendees);
+            var result = await sut.OrderTraining(trainingId, attendees);
             // ASSERT
             // NUnit
             //Assert.That(result.Price, Is.EqualTo(price));
@@ -67,7 +67,7 @@ namespace TrainingsTest
         }
 
         [Test]
-        public void TwoAttendeesShouldPay90Percent()
+        public async Task TwoAttendeesShouldPay90Percent()
         {
             var trainingId = Guid.Empty;
             var trainingPrice = 100m;
@@ -85,7 +85,7 @@ namespace TrainingsTest
 
             var sut = new OrderProcessor(repo);
             // ACT
-            var result = sut.OrderTraining(trainingId, attendees);
+            var result = await sut.OrderTraining(trainingId, attendees);
             // ASSERT
             // NUnit
             //Assert.That(result.Price, Is.EqualTo(price));
@@ -94,7 +94,7 @@ namespace TrainingsTest
 
         [Test]
         [TestCaseSource(typeof(OrderProcessorTestData), nameof(OrderProcessorTestData.TestCases))]
-        public void ThreeAndMoreAttendeesShouldPay80Percent(List<AttendeeEntity> attendees, decimal trainingPrice, decimal orderprice)
+        public async Task ThreeAndMoreAttendeesShouldPay80Percent(List<AttendeeEntity> attendees, decimal trainingPrice, decimal orderprice)
         {
             var trainingId = Guid.Empty;
             var repo = Substitute.For<ITrainingRepository>();
@@ -104,14 +104,14 @@ namespace TrainingsTest
             });
             var sut = new OrderProcessor(repo);
 
-            var result = sut.OrderTraining(trainingId, attendees.ToArray());
+            var result = await sut.OrderTraining(trainingId, attendees.ToArray());
 
             Assert.That(result.Price, Is.EqualTo(orderprice));
         }
 
         [Test]
         [TestCaseSource(typeof(OrderProcessorTestData), nameof(OrderProcessorTestData.TestCasesWithResult))]
-        public decimal ThreeAndMoreAttendeesShouldPay80PercentWithResult(List<AttendeeEntity> attendees, decimal trainingPrice)
+        public async Task<decimal> ThreeAndMoreAttendeesShouldPay80PercentWithResult(List<AttendeeEntity> attendees, decimal trainingPrice)
         {
             var trainingId = Guid.Empty;
             var repo = Substitute.For<ITrainingRepository>();
@@ -121,7 +121,7 @@ namespace TrainingsTest
             });
             var sut = new OrderProcessor(repo);
 
-            var result = sut.OrderTraining(trainingId, attendees.ToArray());
+            var result = await sut.OrderTraining(trainingId, attendees.ToArray());
 
             return result.Price;
         }
@@ -135,13 +135,13 @@ namespace TrainingsTest
                 new AttendeeEntity{FirstName ="Max", Name = "Mustermann"}
             };
             var repo = Substitute.For<ITrainingRepository>();
-            //repo.When(x => x.GetTrainingById(trainingId)).Do(x => { throw new ArgumentOutOfRangeException(); });
+            //repo.When(x => x.GetTrainingById(trainingId)).Do(x => { async  throw new ArgumentOutOfRangeException(); });
             repo.GetTrainingById(trainingId).Throws<ArgumentOutOfRangeException>();
-            //repo.GetTrainingById(trainingId).Returns(x => throw new ArgumentOutOfRangeException());
+            //repo.GetTrainingById(trainingId).Returns(x =>Task.Run(()=> throw new ArgumentOutOfRangeException()));
 
             var sut = new OrderProcessor(repo);
 
-            TestDelegate result = () => sut.OrderTraining(trainingId, attendees);
+            async Task result() => await sut.OrderTraining(trainingId, attendees);
 
             //NUnit
             //result.Should().Throws<ArgumentOutOfRangeException>();

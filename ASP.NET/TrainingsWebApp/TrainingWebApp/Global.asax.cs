@@ -20,7 +20,7 @@ namespace GW.AspNetTraining.TrainingsWebApp
             builder.RegisterType<TrainingRepository>()
                 .As<ITrainingRepository>()
                 .WithParameters(new Parameter[]{
-                new NamedParameter("dataStorePath", @"c:\temp\trainings.xml") });
+                new NamedParameter("dataStorePath", @"c:\temp\trainings.xml")});
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

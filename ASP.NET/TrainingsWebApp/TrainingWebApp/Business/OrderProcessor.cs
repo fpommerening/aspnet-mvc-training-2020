@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace GW.AspNetTraining.TrainingsWebApp.Business
 {
@@ -11,7 +12,7 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
             _trainingRepository = trainingRepository;
         }
 
-        public OrderEntity OrderTraining(Guid trainingId, AttendeeEntity[] attendees)
+        public async Task<OrderEntity> OrderTraining(Guid trainingId, AttendeeEntity[] attendees)
         {
             if (attendees == null)
             {
@@ -23,7 +24,7 @@ namespace GW.AspNetTraining.TrainingsWebApp.Business
                 throw new InvalidOperationException("The order needs at least one attendees");
             }
 
-            var training = _trainingRepository.GetTrainingById(trainingId);
+            var training = await _trainingRepository.GetTrainingById(trainingId);
 
             var order = new OrderEntity
             {
