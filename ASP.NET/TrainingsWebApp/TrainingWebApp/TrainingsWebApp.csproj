@@ -158,6 +158,7 @@
     </Compile>
     <Compile Include="Models\Attendee.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderRequest.cs" />
     <Compile Include="Models\Training.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

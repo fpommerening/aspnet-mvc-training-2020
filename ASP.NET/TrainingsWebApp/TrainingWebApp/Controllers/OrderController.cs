@@ -1,5 +1,6 @@
 ﻿using GW.AspNetTraining.TrainingsWebApp.Business;
 using GW.AspNetTraining.TrainingsWebApp.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -17,7 +18,7 @@ namespace GW.AspNetTraining.TrainingsWebApp.Controllers
             _trainingRepository = trainingRepository;
         }
 
-        public async Task Post([FromBody] Order orderRequest)
+        public async Task Post([FromBody] OrderRequest orderRequest)
         {
             var trainingId = orderRequest.TrainingId;
             var attendees = orderRequest.Attendees.Select(x => new AttendeeEntity
@@ -30,6 +31,19 @@ namespace GW.AspNetTraining.TrainingsWebApp.Controllers
             await _trainingRepository.SaveOrder(order);
         }
 
+        //public async Task Put(Guid orderId, [FromBody] OrderRequest orderRequest)
+        //{
+        //    var trainingId = orderRequest.TrainingId;
+        //    var attendees = orderRequest.Attendees.Select(x => new AttendeeEntity
+        //    {
+        //        FirstName = x.FirstName,
+        //        Name = x.Name
+        //    }).ToArray();
+
+        //    var order = await _orderProcessor.OrderTraining(trainingId, attendees);
+        //    await _trainingRepository.SaveOrder(order);
+        //}
+
         public async Task<Order[]> Get()
         {
             var entities = await _trainingRepository.GetOrders();
@@ -41,7 +55,8 @@ namespace GW.AspNetTraining.TrainingsWebApp.Controllers
                     Name = a.Name
                 }).ToArray(),
                 Price = x.Price,
-                TrainingId = x.Training.Id
+                TrainingId = x.Training.Id,
+                Id = x.Id
             });
             return models.ToArray();
         }
