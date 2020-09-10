@@ -51,9 +51,11 @@
     <div class="flex-container">
         <div class="label">@Html.LabelFor(x => x.Approval)</div>
         <div>
-            <th>@Html.LabelFor(x=>x.Approval)</th>
-            <td>@Html.CheckBoxFor(x => x.Approval) 
-                @Html.ValidationMessageFor(x => x.Approval)</td>
+            <th>@Html.LabelFor(x => x.Approval)</th>
+            <td>
+                @Html.CheckBoxFor(x => x.Approval)
+                @Html.ValidationMessageFor(x => x.Approval)
+            </td>
         </div>
     </div>
     <div class="flex-container">
@@ -62,4 +64,38 @@
         </div>
     </div>
 }
+<div id="attendees"></div>
+
+@section scripts
+{
+    <script>
+        function displayResult(result) {
+            const div = $("#attendees");
+            result.forEach((order) => {
+                order.Attendees.forEach((attendee) => {
+                    div.append(attendee.FirstName + " " + attendee.Name + "<br />");
+                });
+            });
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "/api/order",
+            dataType: "json",
+            success: (response) => displayResult(response),
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+
+
+
+
+    </script>
+
+}
+
 
