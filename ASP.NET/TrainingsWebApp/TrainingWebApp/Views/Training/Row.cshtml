@@ -1,4 +1,5 @@
-﻿@model GW.AspNetTraining.TrainingsWebApp.Models.Training
+﻿
+@model GW.AspNetTraining.TrainingsWebApp.Models.Training
 <tr>
     <td>@Html.DisplayFor(x => Model.Title)</td>
     <td>@Html.DisplayFor(x => Model.Duration)</td>
@@ -9,7 +10,7 @@
                         ?.Text)
     </td>
     <td>
-        @(Model.Approval ? "ja" : "nein")
+        @Html.JaNeinFor(Model => Model.Approval)
     </td>
     <td>
         @Html.ActionLink("Bearbeiten", "Edit", new { Model.Id })
