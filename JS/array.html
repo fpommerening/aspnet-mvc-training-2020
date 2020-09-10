@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        const myArray = [
+            {name: 'Hans', age: 44},
+            {name: 'Sabine', age: 36},
+            {name: 'Mark', age: 32}
+        ]
+        var oliItem = {name : 'Oli', age: 45};
+        var FrankItem = {name : 'Oli', age: 45};
+        myArray.push(oliItem);
+        //console.log(myArray[3]);
+        //myArray.forEach((item) => {
+        //    console.log(item.name);
+        //})
+        //myArray.forEach(function(element){
+        //    console.log(element.name)
+        //});
+
+        //var filteredArray = myArray.filter((item) => {return  item.age > 40});
+        const filteredArray = myArray.filter(item => item.age > 40);
+        const personOver40 = myArray.find(item => item.age > 40);
+        const incOli = myArray.includes(oliItem);
+        const incFrank = myArray.includes(FrankItem);
+        const hasPersonOver40 = myArray.some(item => item.age2 > 40);
+        const allPersonAreOver40 = myArray.every(item => item.age > 40);
+
+        const onlyNames = myArray.map((item) =>{return item.name});
+        const age = myArray.reduce((current, item) =>{
+            return item.age + current
+        }, 0);
+
+    </script>
+</body>
+</html>

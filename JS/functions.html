@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function myFunction(){
+            return "Hallo Welt";
+        }
+
+        function myFunctionWithArgs(arg1, arg2, arg3, arg4){
+            return "Mit vier Args" + arg1 + arg2 + arg3 + arg4;
+        }
+/*
+        function myFunctionWithArgs(arg1, arg2, arg3){
+            return "Hallo Welt" + arg1 + arg2 + arg3;
+        }
+*/
+        function myFunctionWithoutArgs(){
+            return "No Args" + arguments[0] + arguments[1];
+        }
+        
+        function myFunctionWithDefaults(arg1 = 42, arg2 = "Feierabend")
+        {
+            console.log(arg1);
+            console.log(arg2);
+        }
+
+      
+
+
+        function myPrintOutCallBack(arg){
+            console.log("Print: " + arg)
+        }
+
+        function myFunctionWithCallback(arg, callback){
+            var result = arg * 42;
+            callback(result);
+        }
+
+        // console.log(myFunctionWithoutArgs("test", "test2", "test3"));
+        // myFunctionWithDefaults();
+        // myFunctionWithDefaults(22, "Urlaub");
+
+        myFunctionWithCallback(3, myPrintOutCallBack);
+
+    </script>
+</body>
+</html>
