@@ -156,6 +156,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\DateTimeInPastValidator.cs" />
+    <Compile Include="Helper\DateTimeValidator.cs" />
     <Compile Include="Helper\Extensions.cs" />
     <Compile Include="Models\Attendee.cs" />
     <Compile Include="Models\Order.cs" />

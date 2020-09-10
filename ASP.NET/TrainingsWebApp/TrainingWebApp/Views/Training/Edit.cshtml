@@ -59,6 +59,25 @@
         </div>
     </div>
     <div class="flex-container">
+        <div class="label">@Html.LabelFor(x => x.Price)</div>
+        <div>
+            
+                @Html.EditorFor(x => x.Price)
+                @Html.ValidationMessageFor(x => x.Price)
+            
+        </div>
+    </div>
+    <div class="flex-container">
+        <div class="label">@Html.LabelFor(x => x.ValidFrom)</div>
+        <div>
+            @Html.LabelFor(x => x.ValidFrom)
+            
+                @Html.EditorFor(x => x.ValidFrom)
+                @Html.ValidationMessageFor(x => x.ValidFrom)
+            
+        </div>
+    </div>
+    <div class="flex-container">
         <div>
             <button type="submit">Speichern</button>
         </div>

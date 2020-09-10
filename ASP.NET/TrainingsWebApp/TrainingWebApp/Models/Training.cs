@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GW.AspNetTraining.TrainingsWebApp.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -38,5 +39,16 @@ namespace GW.AspNetTraining.TrainingsWebApp.Models
 
         [DisplayName("Freigabe")]
         public bool Approval { get; set; }
+
+        
+        public decimal Price { get; set; }
+
+        [DisplayName("Verfügbar ab")]
+       // [DateTimeInPastValidator(ErrorMessage ="Bitte nur in der Vergangenheit")]
+        [DateTimeInPastValidator()]
+        //[DateTimeValidator(new Date)]
+
+        [DataType(DataType.Date)]
+        public DateTime ValidFrom { get; set; }
     }
 }
