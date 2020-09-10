@@ -1,9 +1,13 @@
 ﻿using GW.AspNetTraining.TrainingsWebApp.Business;
 using GW.AspNetTraining.TrainingsWebApp.Models;
+using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
+using System.Web.Mvc;
 
 namespace GW.AspNetTraining.TrainingsWebApp.Controllers
 {
@@ -59,6 +63,32 @@ namespace GW.AspNetTraining.TrainingsWebApp.Controllers
                 Id = x.Id
             });
             return models.ToArray();
+        }
+
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(Order))]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        public async Task<IHttpActionResult> Get(Guid id)
+        {
+            var entities = await _trainingRepository.GetOrders();
+            var entity = entities.SingleOrDefault(x => x.Id == id);
+            if(entity == null)
+            {
+                return StatusCode(HttpStatusCode.NotFound);
+            }
+
+            var model = new Order
+            {
+                Attendees = entity.Attendees.Select(a => new Attendee
+                {
+                    FirstName = a.FirstName,
+                    Name = a.Name
+                }).ToArray(),
+                Price = entity.Price,
+                TrainingId = entity.Training.Id,
+                Id = entity.Id
+            };
+
+            return Ok(model);
         }
     }
 }
